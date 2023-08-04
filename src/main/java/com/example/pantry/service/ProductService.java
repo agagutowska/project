@@ -25,16 +25,16 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public ProductModel findById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public ProductModel findById(Long productId) {
+        return productRepository.findById(productId).orElse(null);
     }
 
     public void saveEditProduct(ProductModel editProduct) {
         productRepository.save(editProduct);
     }
 
-    public void removeProduct(Long id) {
-        productRepository.deleteById(id);
+    public void removeProduct(Long productId) {
+        productRepository.deleteById(productId);
     }
 
     public Page<ProductModel> getAllProducts(Pageable pageable) {

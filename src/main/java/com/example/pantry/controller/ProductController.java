@@ -17,15 +17,16 @@ public class ProductController {
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
+
         this.productService = productService;
     }
 
     //puste dlatego że to dotyczy strony głównej
-    @GetMapping()
+    @GetMapping("/shelfView")
     public String getProductList(Model model){
         List<ProductModel> productModelList = productService.getProductList();
         model.addAttribute("productList", productModelList);
-        return "index";
+        return "shelfView";
     }
 
     @GetMapping("/addProduct")
@@ -36,13 +37,13 @@ public class ProductController {
     @PostMapping("/addProduct")
     public RedirectView postAddProductAction(ProductModel productModel){
         productService.addProduct(productModel);
-        return new RedirectView("/");
+        return new RedirectView("/shelfView");
     }
 
-    @PostMapping("/deleteProduct/{id}")
-    public RedirectView deleteProductAction(@PathVariable Long id){
-        productService.removeProduct(id);
-        return new RedirectView("/");
+    @PostMapping("/deleteProduct/{productId}")
+    public RedirectView deleteProductAction(@PathVariable Long productId){
+        productService.removeProduct(productId);
+        return new RedirectView("/shelfView");
     }
 
     @GetMapping("/edit/{productId}")
@@ -55,7 +56,7 @@ public class ProductController {
     @PostMapping("/products/save")
     public RedirectView saveProduct(ProductModel editProduct){
        productService.saveEditProduct(editProduct);
-       return new RedirectView("/");
+       return new RedirectView("/shelfView");
    }
 
 }
