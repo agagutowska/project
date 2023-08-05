@@ -35,13 +35,6 @@ public class ProductController {
     }
 
 
-    //stare działające
-//    @GetMapping("/addProduct")
-//    public String showAddProductView(){
-//
-//        return "addProductView";
-//    }
-
     //nowe
     @GetMapping("/addProduct")
     public String showAddProductView(@RequestParam("shelfId") Long shelfId, Model model) {
@@ -51,13 +44,6 @@ public class ProductController {
         model.addAttribute("shelfId", shelfId); // TO TU Przekazuje wartość shelfId do widoku
         return "addProductView";
     }
-
-//stare post mapping do addProduct
-//    @PostMapping("/addProduct")
-//    public RedirectView postAddProductAction(ProductModel productModel){
-//        productService.addProduct(productModel);
-//        return new RedirectView("/shelfView");
-//    }
 
     //nowe post maping do addProduct
     @PostMapping("/addProduct")

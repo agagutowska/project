@@ -38,14 +38,6 @@
             <button>Edit product</button>
           </a>
 
-<!--      </tr>-->
-<!--      <tr th:each="product : ${productsOnShelf}">-->
-<!--        <td th:text="${product.productName}"></td>-->
-<!--        <td th:text="${product.quantityOfProduct}"></td>-->
-<!--        <td th:text="${product.expiryDate}"></td>-->
-<!--        <td th:text="${product.statusOfProduct}"></td>-->
-<!--      </tr>-->
-
     </table>
     <a th:href="@{/addProduct(shelfId=${shelf.shelfId})}" class="btn btn-success" >Add product</a>
 
