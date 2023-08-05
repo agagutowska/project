@@ -35,6 +35,9 @@ public class ProductModel {
 
 
 //    @ManyToOne //do shelves
+@ManyToOne
+@JoinColumn(name = "shelf_id") // Nazwa kolumny reprezentującej klucz obcy
+private ShelfModel shelf;
 
 
 

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShelfRepository extends JpaRepository<ShelfModel, Long> {
-    // Dodatkowe metody do zapytań specyficznych dla ShelfModel, jeśli potrzebne
+
 }

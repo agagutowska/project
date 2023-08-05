@@ -1,5 +1,6 @@
 package com.example.pantry.service;
 
+import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
 import com.example.pantry.repository.ShelfRepository;
 import org.springframework.stereotype.Service;
@@ -26,4 +27,10 @@ public class ShelfService {
     public void deleteShelfById(Long shelfId) {
         shelfRepository.deleteById(shelfId);
     }
+
+    public ShelfModel getShelfById(Long shelfId) {
+        return shelfRepository.findById(shelfId).orElse(null);
+    }
+
+
 }
