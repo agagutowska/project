@@ -1,6 +1,7 @@
 package com.example.pantry.service;
 
 import com.example.pantry.model.ProductModel;
+import com.example.pantry.model.ShelfModel;
 import com.example.pantry.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,5 +41,17 @@ public class ProductService {
     public Page<ProductModel> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
+
+    //Nowe rzeczy do dodawania rzeczy na półki
+
+    public List<ProductModel> getProductsByShelf(ShelfModel shelf) {
+        return productRepository.findByShelf(shelf);
+    }
+
+//    public List<ProductModel> getProductsByShelfId(Long shelfId) {
+//        return productRepository.findByShelfId(shelfId);
+//    }
+
+
 
 }
