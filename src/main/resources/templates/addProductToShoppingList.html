@@ -15,8 +15,11 @@
     <h1>Add Product to Shopping List</h1>
 
     <form th:action="@{/addProductSL}" method="post">
-      <label for="itemName">Item Name:</label>
-      <input type="text" id="itemName" name="itemName" required><br><br>
+      <label for="itemName">Product Name:</label>
+      <select id="itemName" name="itemName" required>
+        <option value=""></option>
+        <option th:each="product : ${products}" th:value="${product.productName}" th:text="${product.productName}"><</option>
+      </select><br><br>
 
       <label for="itemQuantity">Quantity:</label>
       <input type="number" id="itemQuantity" name="itemQuantity" min="1" required><br><br>
