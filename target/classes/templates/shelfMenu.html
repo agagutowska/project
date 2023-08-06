@@ -42,9 +42,9 @@
             <td th:text="${shelf.shelfName}"></td>
             <!-- Formularz do przechodzenia na shelfView-->
             <td>
-                <a class="btn btn-success"
-                   th:href="@{/view/{shelfId}(shelfId=${shelf.shelfId})}">
-                    <button>Check shelf</button></a>
+                <a th:href="@{/view/{shelfId}(shelfId=${shelf.shelfId})}">
+                    <button class="btn btn-success">Check shelf</button></a>
+
             </td>
             <td>
                 <!-- Formularz do usuwania półki -->
