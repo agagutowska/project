@@ -55,7 +55,7 @@ public class ProductController {
     @PostMapping("/deleteProduct/{productId}")
     public RedirectView deleteProductAction(@PathVariable Long productId, @RequestParam Long shelfId, Model model){
         productService.removeProduct(productId);
-//       ShelfModel existingShelf = shelfService.getShelfById(shelfId);
+//       ShelfModel existingShelf = shelfService.getShelfById(shelfId); to już zaciąga z shelfcontrollera
 //        model.addAttribute("shelf", existingShelf);
         return new RedirectView("/view/" + shelfId);
     }
