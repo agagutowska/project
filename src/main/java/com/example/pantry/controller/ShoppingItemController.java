@@ -38,7 +38,11 @@ public class ShoppingItemController {
     }
 
     @GetMapping("/addProductSL")
-    public String showAddItemView(){
+    public String showAddItemView(Model model){
+        List<ProductModel> productModelList = productService.getProductList();
+        List<ShoppingItemModel> shoppingItemList = shoppingItemService.getItemList();
+        model.addAttribute("itemList", shoppingItemList);
+        model.addAttribute("products", productModelList);
         return "addProductToShoppingList";
     }
 
@@ -67,6 +71,8 @@ public class ShoppingItemController {
         }
         return new RedirectView("/shoppingList");
     }
+
+
 
 //    @GetMapping("/edit/{productId}")
 //    public String showEditForm(@PathVariable("productId") Long productId, Model model) {
