@@ -4,6 +4,7 @@ import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
 import com.example.pantry.service.ProductService;
 import com.example.pantry.service.ShelfService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +41,16 @@ public class ShelfController {
         return "redirect:/shelfMenu";
     }
 
-// Rzeczy z dodawaniem produktów na półki
 
+    //Rzeczy do sortowania
     @GetMapping("view/{shelfId}")
-    public String viewShelf(@PathVariable("shelfId") Long shelfId, Model model) {
+    public String viewShelf(@PathVariable("shelfId") Long shelfId,
+                            @RequestParam(name = "sortField", required = false, defaultValue = "productName") String sortField,
+                            @RequestParam(name = "sortOrder", required = false, defaultValue = "asc") String sortOrder,
+                            Model model) {
         ShelfModel shelf = shelfService.getShelfById(shelfId);
-        List<ProductModel> products = productService.getProductsByShelf(shelf);
+        Sort.Direction direction = sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+        List<ProductModel> products = productService.getProductsByShelfAndSortBy(shelf, Sort.by(direction, sortField));
 
         model.addAttribute("shelf", shelf);
         model.addAttribute("products", products);
