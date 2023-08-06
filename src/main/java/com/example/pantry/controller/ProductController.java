@@ -26,14 +26,13 @@ public class ProductController {
         this.productService = productService;
         this.shelfService = shelfService;
     }
-
+//stare i działa
     @GetMapping("/shelfView")
     public String getProductList(Model model){
         List<ProductModel> productModelList = productService.getProductList();
         model.addAttribute("productList", productModelList);
         return "shelfView";
     }
-
 
     //nowe
     @GetMapping("/addProduct")
@@ -77,9 +76,6 @@ public class ProductController {
 
        return new RedirectView("/view/" + shelfId);
    }
-
-   //Dodawanie rzeczy na półki
-
 
 
 }

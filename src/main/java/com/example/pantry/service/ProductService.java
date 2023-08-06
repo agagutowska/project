@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,15 +43,10 @@ public class ProductService {
         return productRepository.findAll(pageable);
     }
 
-    //Nowe rzeczy do dodawania rzeczy na półki
-
-    public List<ProductModel> getProductsByShelf(ShelfModel shelf) {
-        return productRepository.findByShelf(shelf);
+    //Do sortowania
+    public List<ProductModel> getProductsByShelfAndSortBy(ShelfModel shelf, Sort sort) {
+        return productRepository.findByShelf(shelf, sort);
     }
-
-//    public List<ProductModel> getProductsByShelfId(Long shelfId) {
-//        return productRepository.findByShelfId(shelfId);
-//    }
 
 
 

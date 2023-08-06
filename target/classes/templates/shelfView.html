@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
       <title th:text="${shelf.shelfName}">Shelf Name</title>
@@ -18,14 +18,22 @@
 <br><br>
     <table class="table table-striped">
       <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">ExpiryDate</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
-      </tr>
+<tr>
+    <!-- Przycisk sortowania dla Product Name -->
+<th scope="col"><button onclick="sort('productName')">Product Name ↑↓</button></th>
+
+        <!-- Przycisk sortowania dla Quantity -->
+<th scope="col"><button onclick="sort('quantityOfProduct')">Quantity ↑↓</button></th>
+
+        <!-- Przycisk sortowania dla Expiry Date -->
+<th scope="col"><button onclick="sort('expiryDate')">Expiry Date ↑↓</button></th>
+
+        <!-- Przycisk sortowania dla Status -->
+<th scope="col"><button onclick="sort('statusOfProduct')">Status ↑↓</button></th>
+
+</tr>
       </thead>
+        <tbody>
       <tr th:each="product: ${products}">
         <td th:text="${product.getProductName()}" />
         <td th:text="${product.getQuantityOfProduct()}" />
@@ -38,10 +46,31 @@
 
           <a th:href="@{'/edit/' + ${product.productId} + '?shelfId=' + ${shelf.shelfId}}" class="btn btn-primary btn-sm">Edit product
           </a>
-
+            </tr>
+            </tbody>
     </table>
 
   </div>
 </div>
+
+<!-- Skrypt JavaScript do obsługi sortowania -->
+
+<script type="text/javascript">
+    function sort(sortField) {
+        var currentUrl = new URL(window.location.href);
+        var searchParams = currentUrl.searchParams;
+
+        var currentSortOrder = searchParams.get('sortOrder');
+        var newSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+
+        searchParams.set('sortField', sortField);
+        searchParams.set('sortOrder', newSortOrder);
+
+        currentUrl.search = searchParams.toString();
+
+        window.location.href = currentUrl.toString();
+    }
+</script>
+
 </body>
 </html>
