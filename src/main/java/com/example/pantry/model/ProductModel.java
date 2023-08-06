@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +26,6 @@ public class ProductModel {
     private Integer quantityOfProduct;
 
     @Column(name = "expiry_date")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd");
     private LocalDate expiryDate;
 
     @Column(name = "status")
@@ -38,6 +36,14 @@ public class ProductModel {
 @ManyToOne
 @JoinColumn(name = "shelf_id") // Nazwa kolumny reprezentującej klucz obcy
 private ShelfModel shelf;
+
+//    @ManyToMany //bo zarówno produkty idą do półek jak i do listy zakupów
+
+//@ManyToMany(mappedBy = "products")
+//private Set<ShelfModel> shelves = new HashSet<>();
+//
+//    @ManyToMany(mappedBy = "products")
+//    private Set<ShoppingListModel> shoppingLists = new HashSet<>();
 
 
 
