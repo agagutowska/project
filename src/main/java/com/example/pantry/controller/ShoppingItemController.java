@@ -34,7 +34,7 @@ public class ShoppingItemController {
         List<ShoppingItemModel> shoppingItemList = shoppingItemService.getItemList();
         model.addAttribute("itemList", shoppingItemList);
         model.addAttribute("shelves", shelfModelList);
-        return "shoppingList";
+        return "shoppingList/shoppingListView";
     }
 
     @GetMapping("/addProductSL")
@@ -43,7 +43,7 @@ public class ShoppingItemController {
         List<ShoppingItemModel> shoppingItemList = shoppingItemService.getItemList();
         model.addAttribute("itemList", shoppingItemList);
         model.addAttribute("products", productModelList);
-        return "addProductToShoppingList";
+        return "shoppingList/addProductToShoppingListView";
     }
 
     @PostMapping("/addProductSL")
@@ -72,18 +72,4 @@ public class ShoppingItemController {
         return new RedirectView("/shoppingList");
     }
 
-
-
-//    @GetMapping("/edit/{productId}")
-//    public String showEditForm(@PathVariable("productId") Long productId, Model model) {
-//        ProductModel existingProduct = productService.findById(productId);
-//        model.addAttribute("existingProduct", existingProduct);
-//        return "editProductView";
-//    }
-
-//    @PostMapping("/products/save")
-//    public RedirectView saveProduct(ProductModel editProduct){
-//        productService.saveEditProduct(editProduct);
-//        return new RedirectView("/");
-//    }
 }

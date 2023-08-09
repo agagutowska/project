@@ -31,7 +31,7 @@ public class ProductController {
     public String getProductList(Model model){
         List<ProductModel> productModelList = productService.getProductList();
         model.addAttribute("productList", productModelList);
-        return "shelfView";
+        return "shelves/shelfView";
     }
 
     //nowe
@@ -41,7 +41,7 @@ public class ProductController {
         model.addAttribute("shelves", shelves);
         model.addAttribute("productModel", new ProductModel());
         model.addAttribute("shelfId", shelfId); // TO TU Przekazuje wartość shelfId do widoku
-        return "addProductView";
+        return "products/addProductView";
     }
 
     //nowe post maping do addProduct
@@ -65,7 +65,7 @@ public class ProductController {
         model.addAttribute("existingProduct", existingProduct);
         ShelfModel existingShelf = shelfService.getShelfById(shelfId);
         model.addAttribute("shelf", existingShelf);
-        return "editProductView";
+        return "products/editProductView";
     }
 
     @PostMapping("/products/save")

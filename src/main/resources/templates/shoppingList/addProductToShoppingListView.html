@@ -12,7 +12,7 @@
 <div class="container">
   <div class="col-md-auto">
 
-    <h1>Add Product to Shopping List</h1>
+    <h1>Add product to shopping list</h1>
 
     <form th:action="@{/addProductSL}" method="post">
       <label for="itemName">Product Name:</label>
@@ -24,9 +24,11 @@
       <label for="itemQuantity">Quantity:</label>
       <input type="number" id="itemQuantity" name="itemQuantity" min="1" required><br><br>
 
+      <input type="submit" class="btn btn-outline-secondary" value="Add product">
+      <td>
+        <a th:href="@{/shoppingList}" class="btn btn-outline-warning" >Back to shopping list</a>
+      </td>
 
-
-      <input type="submit" value="Add item">
     </form>
 
 

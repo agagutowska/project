@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AuthController {
     @GetMapping("/login")
     public String getLogin() {
-        return "loginView";
+        return "auth/loginView";
     }
 
     @GetMapping("/loginError")
     public String showError() {
-        return "loginErrorView";
+        return "auth/loginErrorView";
     }
 }
