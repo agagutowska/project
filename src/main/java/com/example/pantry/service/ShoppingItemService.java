@@ -31,10 +31,6 @@ public class ShoppingItemService {
         return shoppingItemRepository.findById(shoppingItemId).orElse(null);
     }
 
-    public void saveEditItem(ShoppingItemModel editItem) {
-        shoppingItemRepository.save(editItem);
-    }
-
     public void deleteItem(Long shoppingItemId) {
         shoppingItemRepository.deleteById(shoppingItemId);
     }
@@ -42,9 +38,6 @@ public class ShoppingItemService {
     public Page<ShoppingItemModel> getAllItems(Pageable pageable) {
         return shoppingItemRepository.findAll(pageable);
     }
-
-
-
 
 
 }

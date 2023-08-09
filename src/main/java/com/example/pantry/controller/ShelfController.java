@@ -26,7 +26,7 @@ public class ShelfController {
         List<ShelfModel> shelves = shelfService.getAllShelves();
         model.addAttribute("shelves", shelves);
         model.addAttribute("newShelf", new ShelfModel());
-        return "shelfMenu";
+        return "shelves/shelfMenuView";
     }
 
     @PostMapping("/shelves/add")
@@ -55,7 +55,7 @@ public class ShelfController {
         model.addAttribute("shelf", shelf);
         model.addAttribute("products", products);
 
-        return "shelfView";
+        return "shelves/shelfView";
     }
 
 

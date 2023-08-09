@@ -12,7 +12,7 @@ public class HomeController {
 
     @GetMapping("/profileHome")
     public String showProfileHome() {
-        return "profileHome";  // to jest nazwa widoku (np. profileHome.html), który zostanie zwrócony
+        return "profileHomeView";  // to jest nazwa widoku (np. profileHomeView.html), który zostanie zwrócony
     }
 
 }
