@@ -20,7 +20,10 @@ public class Auth {
 protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/login", "/loginError", "/error").permitAll()
+                        .requestMatchers("/static/**").permitAll()
+                        .requestMatchers("/pantrylogo.jpg").permitAll()
                         .requestMatchers("/**").authenticated();
+
             })
             .formLogin(login -> login.loginPage("/login").permitAll().failureUrl("/loginError"))
             .logout(logout -> logout.logoutSuccessUrl("/login"))
@@ -35,6 +38,10 @@ protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
+
+
+
+
 
 }
 

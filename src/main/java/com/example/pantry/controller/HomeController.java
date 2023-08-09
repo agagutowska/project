@@ -9,4 +9,10 @@ public class HomeController {
     public String getHome() {
         return "homeView";
     }
+
+    @GetMapping("/profileHome")
+    public String showProfileHome() {
+        return "profileHome";  // to jest nazwa widoku (np. profileHome.html), który zostanie zwrócony
+    }
+
 }
