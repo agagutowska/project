@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.validation.BindingResult;
+
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -31,8 +34,7 @@ public class ShoppingItemController {
     @GetMapping("/shoppingList")
     public String getItemList(Model model) {
         List<ShelfModel> shelfModelList = shelfService.getAllShelves();
-        List<ShoppingItemModel> shoppingItemList = shoppingItemService.getItemList();
-        model.addAttribute("itemList", shoppingItemList);
+        model.addAttribute("itemList", shoppingItemService.getItemList());
         model.addAttribute("shelves", shelfModelList);
         return "shoppingList/shoppingListView";
     }
@@ -45,12 +47,29 @@ public class ShoppingItemController {
         model.addAttribute("products", productModelList);
         return "shoppingList/addProductToShoppingListView";
     }
+//stare
+//    @PostMapping("/addProductSL")
+//    public RedirectView postAddItemAction(ShoppingItemModel shoppingItemModel){
+//        shoppingItemService.addProduct(shoppingItemModel);
+//        return new RedirectView("/shoppingList");
+//    }
 
+    //nowe z walidacją
     @PostMapping("/addProductSL")
-    public RedirectView postAddItemAction(ShoppingItemModel shoppingItemModel){
+    public String postAddItemAction(@Valid @ModelAttribute("shoppingItem") ShoppingItemModel shoppingItemModel, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<ProductModel> productModelList = productService.getProductList();
+
+            model.addAttribute("itemList", shoppingItemService.getItemList());
+            model.addAttribute("products", productModelList);
+            return "shoppingList/addProductToShoppingListView";
+        }
+
         shoppingItemService.addProduct(shoppingItemModel);
-        return new RedirectView("/shoppingList");
+        return "redirect:/shoppingList";
     }
+
+
 
     @PostMapping("/deleteProductSL/{shoppingItemId}")
     public RedirectView deleteItemAction(@PathVariable Long shoppingItemId){

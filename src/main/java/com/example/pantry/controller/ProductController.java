@@ -49,6 +49,7 @@ public class ProductController {
 //        productService.addProduct(productModel);
 //        return new RedirectView("/view/" + shelfId);
 //    }
+
 //nowe z walidacją
     @PostMapping("/addProduct")
     public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
@@ -56,9 +57,8 @@ public class ProductController {
             model.addAttribute("productModel", productModel);
             return "products/addProductView";
         }
-
         productService.addProduct(productModel);
-        return "redirect:/view/" + shelfId;
+        return  "redirect:/view/" + shelfId;
     }
 
     @PostMapping("/deleteProduct/{productId}")
