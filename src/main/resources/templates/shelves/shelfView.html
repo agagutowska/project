@@ -25,6 +25,9 @@
         <!-- Przycisk sortowania dla Quantity -->
 <th scope="col"><button onclick="sort('quantityOfProduct')">Quantity ↑↓</button></th>
 
+        <!-- Przycisk sortowania dla Measurement Unit -->
+<th scope="col"><button onclick="sort('measurementUnit')">Measurement Unit ↑↓</button></th>
+
         <!-- Przycisk sortowania dla Expiry Date -->
 <th scope="col"><button onclick="sort('expiryDate')">Expiry Date ↑↓</button></th>
 
@@ -37,6 +40,7 @@
       <tr th:each="product: ${products}">
         <td th:text="${product.getProductName()}" />
         <td th:text="${product.getQuantityOfProduct()}" />
+        <td th:text="${product.getMeasurementUnit()}"></td>
         <td th:text="${product.getExpiryDate()}" />
         <td th:text="${product.getStatusOfProduct()}" />
 

@@ -4,11 +4,14 @@ import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
 import com.example.pantry.service.ProductService;
 import com.example.pantry.service.ShelfService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Binding;
 import java.util.List;
 
 @Controller
@@ -30,7 +33,12 @@ public class ShelfController {
     }
 
     @PostMapping("/shelves/add")
-    public String addShelf(@ModelAttribute ShelfModel shelfModel) {
+    public String addShelf(@Valid @ModelAttribute ShelfModel shelfModel, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()){
+            model.addAttribute("shelves", shelfService.getAllShelves());
+            model.addAttribute("newShelf", shelfModel);
+            return "shelves/shelfMenuView";
+        }
         shelfService.addShelf(shelfModel);
         return "redirect:/shelfMenu";
     }
