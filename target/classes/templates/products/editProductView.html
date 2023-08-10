@@ -35,6 +35,18 @@
       <label for="quantityOfProduct">Quantity:</label>
       <input type="number" id="quantityOfProduct" th:field="*{quantityOfProduct}" class="form-control" required>
 
+      <label for="measurementUnit">Measurement Unit:</label>
+      <select id="measurementUnit" th:field="*{measurementUnit}" class="form-control" required>
+        <option value=""></option>
+        <option value="g">g</option>
+        <option value="kg">kg</option>
+        <option value="ml">ml</option>
+        <option value="l">l</option>
+        <option value="bag">bag</option>
+        <option value="piece">piece</option>
+        <option value="package">package</option>
+      </select>
+
       <label for="expiryDate">Expiry date:</label>
       <input type="date" id="expiryDate" th:field="*{expiryDate}" class="form-control" >
 

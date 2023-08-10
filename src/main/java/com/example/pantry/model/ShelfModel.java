@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -19,6 +22,9 @@ public class ShelfModel {
     @Column(name = "shelf_id")
     private Long shelfId;
 
+
+    @NotBlank(message = "Shelf name cannot be blank")
+    @Size(min = 3, max = 30, message = "Shelf name must be between 3 and 30 characters")
     @Column(name = "shelf_name")
     private String shelfName;
 

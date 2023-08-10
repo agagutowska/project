@@ -19,11 +19,16 @@ public class ProductModel {
     @Column(name = "product_id")
     private Long productId;
 
+    //komit
     @Column(name = "product_name")
     private String productName;
 
+    //komit
     @Column(name = "quantity")
     private Integer quantityOfProduct;
+
+    @Column(name = "measurement_unit")
+    private String measurementUnit;
 
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
@@ -36,16 +41,5 @@ public class ProductModel {
 @ManyToOne
 @JoinColumn(name = "shelf_id") // Nazwa kolumny reprezentującej klucz obcy
 private ShelfModel shelf;
-
-//    @ManyToMany //bo zarówno produkty idą do półek jak i do listy zakupów
-
-//@ManyToMany(mappedBy = "products")
-//private Set<ShelfModel> shelves = new HashSet<>();
-//
-//    @ManyToMany(mappedBy = "products")
-//    private Set<ShoppingListModel> shoppingLists = new HashSet<>();
-
-
-
 
 }
