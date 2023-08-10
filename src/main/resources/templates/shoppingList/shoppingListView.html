@@ -53,16 +53,18 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Quantity</th>
+        <th scope="col">Measurement Unit</th>
         <th scope="col">Basket</th>
         <th scope="col">Action</th>
         <th scope="col">Upload to Shelf</th>
 
       </tr>
       </thead>
-
+<tbody>
       <tr th:each="item: ${itemList}">
         <td th:text="${item.getItemName()}" />
         <td th:text="${item.getItemQuantity()}" />
+        <td th:text="${item.getMeasurementUnit()}"></td>
         <td>
           <button type="button" class="btn-change btn-outline-secondary" onclick="changeButtonColor(this)">In Bucket</button>
         </td>
@@ -71,10 +73,11 @@
 
         <td><form th:action="@{'/sendProduct/' + ${item.getShoppingItemId()}}" method="post" >
           <button type="submit" class="btn btn-default">Send</button></form></td>
-
+      </tr>
+      </tbody>
           <br>
 
 </table>
-
+  </div>
 </body>
 </html>
