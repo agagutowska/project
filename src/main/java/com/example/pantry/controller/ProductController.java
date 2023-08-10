@@ -6,11 +6,10 @@ import com.example.pantry.service.ProductService;
 import com.example.pantry.service.ShelfService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.validation.BindingResult;
+import jakarta.validation.Valid;
 
 import java.util.List;
 @Controller
@@ -44,18 +43,27 @@ public class ProductController {
         return "products/addProductView";
     }
 
-    //nowe post maping do addProduct
+    //stare post maping do addProduct
+//    @PostMapping("/addProduct")
+//    public RedirectView postAddProductAction(ProductModel productModel, @RequestParam Long shelfId) {
+//        productService.addProduct(productModel);
+//        return new RedirectView("/view/" + shelfId);
+//    }
+//nowe z walidacją
     @PostMapping("/addProduct")
-    public RedirectView postAddProductAction(ProductModel productModel, @RequestParam Long shelfId) {
+    public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("productModel", productModel);
+            return "products/addProductView";
+        }
+
         productService.addProduct(productModel);
-        return new RedirectView("/view/" + shelfId);
+        return "redirect:/view/" + shelfId;
     }
 
     @PostMapping("/deleteProduct/{productId}")
     public RedirectView deleteProductAction(@PathVariable Long productId, @RequestParam Long shelfId, Model model){
         productService.removeProduct(productId);
-//       ShelfModel existingShelf = shelfService.getShelfById(shelfId); to już zaciąga z shelfcontrollera
-//        model.addAttribute("shelf", existingShelf);
         return new RedirectView("/view/" + shelfId);
     }
 
@@ -69,13 +77,28 @@ public class ProductController {
     }
 
     @PostMapping("/products/save")
-    public RedirectView saveProduct(ProductModel editProduct, @RequestParam Long shelfId){
+    public String saveProduct(@ModelAttribute @Valid ProductModel editProduct, BindingResult result, @RequestParam Long shelfId, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("existingProduct", editProduct);
+            return "products/editProductView";
+        }
+
         ShelfModel existingShelf = shelfService.getShelfById(shelfId);
-       editProduct.setShelf(existingShelf);
+        editProduct.setShelf(existingShelf);
         productService.saveEditProduct(editProduct);
 
-       return new RedirectView("/view/" + shelfId);
-   }
+        return "redirect:/view/" + shelfId;
+    }
+
+//stare
+//    @PostMapping("/products/save")
+//    public RedirectView saveProduct(ProductModel editProduct, @RequestParam Long shelfId){
+//        ShelfModel existingShelf = shelfService.getShelfById(shelfId);
+//       editProduct.setShelf(existingShelf);
+//        productService.saveEditProduct(editProduct);
+//
+//       return new RedirectView("/view/" + shelfId);
+//   }
 
 
 }
