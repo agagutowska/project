@@ -10,9 +10,10 @@
 <div class="container">
     <h1 class="mt-5 mb-4">PANTRY</h1>
     <h2 class="mt-1 mb-1">Shelves</h2>
+    <p>Shelves is a dedicated place where you can create virtual shelves and fill them with products. Proper shelf inventory is critical to trouble-free use.</p>
+    <p>After setting up your shelf properly, you can easily utilize the Shopping List.</p>
 
-    <br><br>
-
+    <br>
     <!-- Formularz do dodawania półki -->
     <form th:action="@{/shelves/add}" method="post" th:object="${newShelf}">
         <label for="shelfName">Shelf name:</label>
@@ -41,7 +42,7 @@
             <!-- Formularz do przechodzenia na shelfView-->
             <td>
                 <a th:href="@{/view/{shelfId}(shelfId=${shelf.shelfId})}">
-                    <button class="btn btn-success">Check shelf</button></a>
+                    <button class="btn btn-success">Shelf Inventory</button></a>
 
             </td>
             <td>
