@@ -33,7 +33,7 @@ class ProductModelTest {
         product.setQuantityOfProduct(10);
         product.setMeasurementUnit("pieces");
         product.setExpiryDate(LocalDate.now().plusDays(7));
-        product.setStatusOfProduct("Okay");
+        product.setStatusOfProduct(ProductStatus.OKAY);
 
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
