@@ -40,7 +40,7 @@
             <tr th:each="product: ${products}">
                 <td th:text="${product.getProductName()}" />
                 <td th:text="${product.getQuantityOfProduct()}" />
-                <td th:text="${product.getMeasurementUnit()}"></td>
+                <td th:text="${product.getMeasurementUnit().getDisplayUnit()}"></td>
                 <td th:text="${product.getExpiryDate()}" />
                 <td th:text="${product.getStatusOfProduct.getDisplayStatus()}" />
 
