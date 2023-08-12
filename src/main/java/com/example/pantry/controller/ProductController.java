@@ -1,5 +1,6 @@
 package com.example.pantry.controller;
 
+import com.example.pantry.model.MeasurementUnit;
 import com.example.pantry.model.ProductStatus;
 import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
@@ -18,7 +19,6 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    //nowe
     private final ShelfService shelfService;
 
     public ProductController(ProductService productService, ShelfService shelfService) {
@@ -42,6 +42,7 @@ public class ProductController {
         model.addAttribute("productModel", new ProductModel());
         model.addAttribute("shelfId", shelfId); // TO TU Przekazuje wartość shelfId do widoku
         model.addAttribute("statusOfProduct", ProductStatus.values());
+        model.addAttribute("measurementUnit", MeasurementUnit.values());
         return "products/addProductView";
     }
 
@@ -56,6 +57,8 @@ public class ProductController {
     public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("productModel", productModel);
+            model.addAttribute("statusOfProduct", ProductStatus.values());
+            model.addAttribute("measurementUnit", MeasurementUnit.values());
             return "products/addProductView";
         }
 
@@ -76,6 +79,7 @@ public class ProductController {
         ShelfModel existingShelf = shelfService.getShelfById(shelfId);
         model.addAttribute("shelf", existingShelf);
         model.addAttribute("statusOfProduct", ProductStatus.values());
+        model.addAttribute("measurementUnit", MeasurementUnit.values());
         return "products/editProductView";
     }
 
@@ -84,6 +88,7 @@ public class ProductController {
         if (result.hasErrors()) {
             model.addAttribute("existingProduct", editProduct);
             model.addAttribute("statusOfProduct", ProductStatus.values());
+            model.addAttribute("measurementUnit", MeasurementUnit.values());
             return "products/editProductView";
         }
 
