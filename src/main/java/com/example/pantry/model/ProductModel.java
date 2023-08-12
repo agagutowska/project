@@ -29,9 +29,10 @@ public class ProductModel {
     @Column(name = "quantity")
     private Integer quantityOfProduct;
 
-    @NotEmpty(message = "Measurement unit cannot be empty.")
+//    @NotEmpty(message = "Measurement unit cannot be empty.")
     @Column(name = "measurement_unit")
-    private String measurementUnit;
+    @Enumerated(EnumType.STRING)
+    private MeasurementUnit measurementUnit;
 
     @Future(message = "Expiry date should be in the future.")
     @Column(name = "expiry_date")

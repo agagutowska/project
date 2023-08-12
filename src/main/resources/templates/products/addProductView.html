@@ -40,18 +40,13 @@
       <input type="number" id="quantityOfProduct" name="quantityOfProduct" min="0" class="form-control" th:field="*{quantityOfProduct}" required>
       <p class="error" th:if="${#fields.hasErrors('quantityOfProduct')}" th:errors="*{quantityOfProduct}"></p>
 
-      <label for="measurementUnit">Measurement Unit:</label>
-      <select id="measurementUnit" name="measurementUnit" class="form-control" th:field="*{measurementUnit}" required>
-        <option value=""></option>
-        <option value="g">g</option>
-        <option value="kg">kg</option>
-        <option value="ml">ml</option>
-        <option value="l">l</option>
-        <option value="bag">bag</option>
-        <option value="piece">piece</option>
-        <option value="package">package</option>
+      <label>Measurement Unit:</label>
+      <select th:field="*{measurementUnit}" class="form-control">
+        <option th:each="unit : ${measurementUnit}"
+                th:value="${unit}" th:text="${unit.displayUnit}">
+        </option>
       </select>
-      <p class="error" th:if="${#fields.hasErrors('measurementUnit')}" th:errors="*{measurementUnit}"></p>
+<!--      <p class="error" th:if="${#fields.hasErrors('measurementUnit')}" th:errors="*{measurementUnit}"></p>-->
 
       <label for="expiryDate">Expiry date:</label>
       <input type="date" id="expiryDate" name="expiryDate" class="form-control" th:field="*{expiryDate}" >
