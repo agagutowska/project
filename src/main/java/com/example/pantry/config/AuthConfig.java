@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-public class Auth {
+public class AuthConfig {
 
 @Bean
 protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
