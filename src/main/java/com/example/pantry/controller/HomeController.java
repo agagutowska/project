@@ -7,12 +7,12 @@ public class HomeController {
     //to miejsce powoduje że localhost:8080 przekierowuje mnie na homeView
     @GetMapping()
     public String getHome() {
-        return "homeView";
+        return "index";
     }
 
-    @GetMapping("/profileHome")
+    @GetMapping("/profiles")
     public String showProfileHome() {
-        return "profileHomeView";  // to jest nazwa widoku (np. profileHomeView.html), który zostanie zwrócony
+        return "profilesView";  // to jest nazwa widoku (np. profilesView.html), który zostanie zwrócony
     }
 
 }
