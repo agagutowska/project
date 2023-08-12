@@ -14,12 +14,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-public class Auth {
+public class AuthConfig {
 
 @Bean
 protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/login", "/loginError", "/error").permitAll()
+                auth.requestMatchers("/login", "/loginError", "/error", "/h2-console/**").permitAll()
                         .requestMatchers("/static/**").permitAll()
                         .requestMatchers("/pantrylogo.jpg").permitAll()
                         .requestMatchers("/**").authenticated();
