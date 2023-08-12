@@ -43,16 +43,11 @@
       <input type="number" id="itemQuantity" name="itemQuantity" min="1" class="form-control" required>
 
 
-      <label for="measurementUnit">Measurement Unit:</label>
-      <select id="measurementUnit" name="measurementUnit" class="form-control" required>
-        <option value=""></option>
-        <option value="g">g</option>
-        <option value="kg">kg</option>
-        <option value="ml">ml</option>
-        <option value="l">l</option>
-        <option value="bag">bag</option>
-        <option value="piece">piece</option>
-        <option value="package">package</option>
+      <label>Measurement Unit:</label>
+      <select th:field="*{measurementUnit}" class="form-control">
+        <option th:each="unit : ${measurementUnit}"
+                th:value="${unit}" th:text="${unit.displayUnit}">
+        </option>
       </select>
 
 
