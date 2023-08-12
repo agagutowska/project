@@ -1,5 +1,7 @@
 package com.example.pantry.model;
 
+import com.example.pantry.enums.MeasurementUnitEnum;
+import com.example.pantry.enums.ProductStatusEnum;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -31,9 +33,9 @@ class ProductModelTest {
         ProductModel product = new ProductModel();
         product.setProductName("Apple");
         product.setQuantityOfProduct(10);
-        product.setMeasurementUnit("pieces");
+        product.setMeasurementUnit(MeasurementUnitEnum.GRAMS);
         product.setExpiryDate(LocalDate.now().plusDays(7));
-        product.setStatusOfProduct(ProductStatus.OKAY);
+        product.setStatusOfProduct(ProductStatusEnum.OKAY);
 
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
