@@ -1,7 +1,7 @@
 package com.example.pantry.controller;
 
-import com.example.pantry.model.MeasurementUnit;
-import com.example.pantry.model.ProductStatus;
+import com.example.pantry.enums.MeasurementUnitEnum;
+import com.example.pantry.enums.ProductStatusEnum;
 import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
 import com.example.pantry.service.ProductService;
@@ -41,8 +41,8 @@ public class ProductController {
         model.addAttribute("shelves", shelves);
         model.addAttribute("productModel", new ProductModel());
         model.addAttribute("shelfId", shelfId); // TO TU Przekazuje wartość shelfId do widoku
-        model.addAttribute("statusOfProduct", ProductStatus.values());
-        model.addAttribute("measurementUnit", MeasurementUnit.values());
+        model.addAttribute("statusOfProduct", ProductStatusEnum.values());
+        model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
         return "products/addProductView";
     }
 
@@ -57,8 +57,8 @@ public class ProductController {
     public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("productModel", productModel);
-            model.addAttribute("statusOfProduct", ProductStatus.values());
-            model.addAttribute("measurementUnit", MeasurementUnit.values());
+            model.addAttribute("statusOfProduct", ProductStatusEnum.values());
+            model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "products/addProductView";
         }
 
@@ -78,8 +78,8 @@ public class ProductController {
         model.addAttribute("existingProduct", existingProduct);
         ShelfModel existingShelf = shelfService.getShelfById(shelfId);
         model.addAttribute("shelf", existingShelf);
-        model.addAttribute("statusOfProduct", ProductStatus.values());
-        model.addAttribute("measurementUnit", MeasurementUnit.values());
+        model.addAttribute("statusOfProduct", ProductStatusEnum.values());
+        model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
         return "products/editProductView";
     }
 
@@ -87,8 +87,8 @@ public class ProductController {
     public String saveProduct(@ModelAttribute @Valid ProductModel editProduct, BindingResult result, @RequestParam Long shelfId, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("existingProduct", editProduct);
-            model.addAttribute("statusOfProduct", ProductStatus.values());
-            model.addAttribute("measurementUnit", MeasurementUnit.values());
+            model.addAttribute("statusOfProduct", ProductStatusEnum.values());
+            model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "products/editProductView";
         }
 

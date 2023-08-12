@@ -38,7 +38,7 @@
       <label>Measurement Unit:</label>
       <select th:field="*{measurementUnit}" class="form-control">
         <option th:each="unit : ${measurementUnit}"
-      th:value="${unit}" th:text="${unit.displayUnit}">
+                th:value="${unit}" th:text="${unit.displayUnit}">
       </option>
       </select>
 
