@@ -1,13 +1,13 @@
 package com.example.pantry.repository;
 
-import com.example.pantry.model.ShoppingItemModel;
+import com.example.pantry.model.ShoppingListModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ShoppingItemRepository extends JpaRepository<ShoppingItemModel, Long> {
-    Page<ShoppingItemModel> findAll(Pageable pageable);
+public interface ShoppingListRepository extends JpaRepository<ShoppingListModel, Long> {
+    Page<ShoppingListModel> findAll(Pageable pageable);
 
 }

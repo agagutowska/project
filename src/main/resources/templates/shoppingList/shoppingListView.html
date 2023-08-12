@@ -67,7 +67,7 @@
       <tr th:each="item: ${itemList}">
         <td th:text="${item.getItemName()}" />
         <td th:text="${item.getItemQuantity()}" />
-        <td th:text="${item.getMeasurementUnit()}"></td>
+        <td th:text="${item.getMeasurementUnit.getDisplayUnit()}"></td>
         <td>
           <button type="button" class="btn-change btn-outline-secondary" onclick="changeButtonColor(this)">In Basket</button>
         </td>

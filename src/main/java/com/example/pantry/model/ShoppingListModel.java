@@ -1,5 +1,6 @@
 package com.example.pantry.model;
 
+import com.example.pantry.enums.MeasurementUnitEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ShoppingItemModel {
+public class ShoppingListModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "shopping_item_id")
@@ -27,8 +28,8 @@ public class ShoppingItemModel {
     @Column(name = "quantity")
     private Integer itemQuantity;
 
-    @NotEmpty(message = "Measurement unit cannot be empty.")
     @Column(name = "measurement_unit")
-    private String measurementUnit;
+    @Enumerated(EnumType.STRING)
+    private MeasurementUnitEnum measurementUnit;
 
 }

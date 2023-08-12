@@ -1,12 +1,12 @@
 package com.example.pantry.controller;
 
+import com.example.pantry.enums.MeasurementUnitEnum;
 import com.example.pantry.model.ProductModel;
-
 import com.example.pantry.model.ShelfModel;
-import com.example.pantry.model.ShoppingItemModel;
+import com.example.pantry.model.ShoppingListModel;
 import com.example.pantry.service.ProductService;
 import com.example.pantry.service.ShelfService;
-import com.example.pantry.service.ShoppingItemService;
+import com.example.pantry.service.ShoppingListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +19,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping
-public class ShoppingItemController {
+public class ShoppingListController {
 
-    private final ShoppingItemService shoppingItemService;
+    private final ShoppingListService shoppingListService;
     private final ProductService productService;
     private final ShelfService shelfService;
 
-    public ShoppingItemController(ShoppingItemService shoppingListService, ProductService productService, ShelfService shelfService) {
-        this.shoppingItemService = shoppingListService;
+    public ShoppingListController(ShoppingListService shoppingListService, ProductService productService, ShelfService shelfService) {
+        this.shoppingListService = shoppingListService;
         this.productService = productService;
         this.shelfService = shelfService;
     }
@@ -34,7 +34,7 @@ public class ShoppingItemController {
     @GetMapping("/shoppingList")
     public String getItemList(Model model) {
         List<ShelfModel> shelfModelList = shelfService.getAllShelves();
-        model.addAttribute("itemList", shoppingItemService.getItemList());
+        model.addAttribute("itemList", shoppingListService.getItemList());
         model.addAttribute("shelves", shelfModelList);
         return "shoppingList/shoppingListView";
     }
@@ -42,9 +42,11 @@ public class ShoppingItemController {
     @GetMapping("/addProductSL")
     public String showAddItemView(Model model){
         List<ProductModel> productModelList = productService.getProductList();
-        List<ShoppingItemModel> shoppingItemList = shoppingItemService.getItemList();
+        List<ShoppingListModel> shoppingItemList = shoppingListService.getItemList();
+        model.addAttribute("shoppingItem", new ShoppingListModel());
         model.addAttribute("itemList", shoppingItemList);
         model.addAttribute("products", productModelList);
+        model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
         return "shoppingList/addProductToShoppingListView";
     }
 //stare
@@ -56,16 +58,18 @@ public class ShoppingItemController {
 
     //nowe z walidacją
     @PostMapping("/addProductSL")
-    public String postAddItemAction(@Valid @ModelAttribute("shoppingItem") ShoppingItemModel shoppingItemModel, BindingResult result, Model model) {
+    public String postAddItemAction(@Valid @ModelAttribute("shoppingItem") ShoppingListModel shoppingListModel, BindingResult result, Model model) {
         if (result.hasErrors()) {
             List<ProductModel> productModelList = productService.getProductList();
+            List<ShoppingListModel> shoppingItemList = shoppingListService.getItemList();
 
-            model.addAttribute("itemList", shoppingItemService.getItemList());
+            model.addAttribute("itemList", shoppingItemList);
             model.addAttribute("products", productModelList);
+            model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "shoppingList/addProductToShoppingListView";
         }
 
-        shoppingItemService.addProduct(shoppingItemModel);
+        shoppingListService.addProduct(shoppingListModel);
         return "redirect:/shoppingList";
     }
 
@@ -73,22 +77,24 @@ public class ShoppingItemController {
 
     @PostMapping("/deleteProductSL/{shoppingItemId}")
     public RedirectView deleteItemAction(@PathVariable Long shoppingItemId){
-        shoppingItemService.deleteItem(shoppingItemId);
+        shoppingListService.deleteItem(shoppingItemId);
         return new RedirectView("/shoppingList");
     }
 
     @PostMapping("/sendProduct/{shoppingItemId}")
-    public RedirectView sendItemAction(@PathVariable Long shoppingItemId){
-        ShoppingItemModel existingItem = shoppingItemService.findById(shoppingItemId);
-        List <ProductModel> allProduct = productService.getProductList();
+    public RedirectView sendItemAction(@PathVariable Long shoppingItemId) {
+        ShoppingListModel existingItem = shoppingListService.findById(shoppingItemId);
+        List<ProductModel> allProduct = productService.getProductList();
         for (ProductModel product : allProduct) {
-            if (product.getProductName().equals(existingItem.getItemName())){
-                product.setQuantityOfProduct(product.getQuantityOfProduct()+existingItem.getItemQuantity());
+            if (product.getProductName().equals(existingItem.getItemName()) &&
+                    product.getMeasurementUnit() == existingItem.getMeasurementUnit()) {
+                product.setQuantityOfProduct(product.getQuantityOfProduct() + existingItem.getItemQuantity());
                 productService.saveEditProduct(product);
-                shoppingItemService.deleteItem(existingItem.getShoppingItemId());
+                shoppingListService.deleteItem(existingItem.getShoppingItemId());
+                }
             }
+            return new RedirectView("/shoppingList");
         }
-        return new RedirectView("/shoppingList");
+
     }
 
-}
