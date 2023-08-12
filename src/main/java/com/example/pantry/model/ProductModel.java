@@ -1,5 +1,7 @@
 package com.example.pantry.model;
 
+import com.example.pantry.enums.MeasurementUnitEnum;
+import com.example.pantry.enums.ProductStatusEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -32,16 +34,16 @@ public class ProductModel {
 //    @NotEmpty(message = "Measurement unit cannot be empty.")
     @Column(name = "measurement_unit")
     @Enumerated(EnumType.STRING)
-    private MeasurementUnit measurementUnit;
+    private MeasurementUnitEnum measurementUnit;
 
     @Future(message = "Expiry date should be in the future.")
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
 
-    //    @NotEmpty(message = "Status cannot be empty.")
+//    @NotEmpty(message = "Status cannot be empty.")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private ProductStatus statusOfProduct;
+    private ProductStatusEnum statusOfProduct;
 
 
     //    @ManyToOne //do shelves
