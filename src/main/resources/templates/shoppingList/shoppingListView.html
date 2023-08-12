@@ -26,10 +26,13 @@
 
   <script type="text/javascript">
     function changeButtonColor(buttonElement) {
-      if (buttonElement.className === "btn-change") {
-        buttonElement.className = "btn-clicked";
+        console.log("change")
+      if (buttonElement.className == "btn-change") {
+          console.log("change1")
+          buttonElement.className = "btn-clicked";
       } else {
-        buttonElement.className = "btn-change";
+          console.log("change2")
+          buttonElement.className = "btn-change";
       }
     }
   </script>
@@ -66,7 +69,7 @@
         <td th:text="${item.getItemQuantity()}" />
         <td th:text="${item.getMeasurementUnit()}"></td>
         <td>
-          <button type="button" class="btn-change btn-outline-secondary" onclick="changeButtonColor(this)">In Bucket</button>
+          <button type="button" class="btn-change btn-outline-secondary" onclick="changeButtonColor(this)">In Basket</button>
         </td>
         <td><form th:action="@{'/deleteProductSL/' + ${item.getShoppingItemId()}}" method="post" >
           <input type="submit" class="btn btn-danger btn-sm" value="Delete product"/> </form>
@@ -79,5 +82,6 @@
 
 </table>
   </div>
+</div>
 </body>
 </html>

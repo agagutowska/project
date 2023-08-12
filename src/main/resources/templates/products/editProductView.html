@@ -17,7 +17,16 @@
     input[type="submit"] {
       margin-top: 20px;
     }
+    .error {
+      color: red;
+    }
   </style>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 </head>
 
 <body>
@@ -54,6 +63,8 @@
 
       <input type="submit" value="Save" class="btn btn-primary btn-block">
     </form>
+    <br>
+    <button type="button" class="btn btn-outline-warning" onclick="goBack()">Go back</button>
 
   </div>
 </div>
