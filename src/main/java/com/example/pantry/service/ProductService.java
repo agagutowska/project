@@ -5,8 +5,6 @@ import com.example.pantry.model.ShelfModel;
 import com.example.pantry.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -39,15 +37,8 @@ public class ProductService {
         productRepository.deleteById(productId);
     }
 
-    public Page<ProductModel> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
-
-    //Do sortowania
     public List<ProductModel> getProductsByShelfAndSortBy(ShelfModel shelf, Sort sort) {
         return productRepository.findByShelf(shelf, sort);
     }
-
-
 
 }

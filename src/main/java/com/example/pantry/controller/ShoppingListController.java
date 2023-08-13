@@ -49,31 +49,20 @@ public class ShoppingListController {
         model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
         return "shoppingList/addProductToShoppingListView";
     }
-//stare
-//    @PostMapping("/addProductSL")
-//    public RedirectView postAddItemAction(ShoppingItemModel shoppingItemModel){
-//        shoppingItemService.addProduct(shoppingItemModel);
-//        return new RedirectView("/shoppingList");
-//    }
 
-    //nowe z walidacją
     @PostMapping("/addProductSL")
     public String postAddItemAction(@Valid @ModelAttribute("shoppingItem") ShoppingListModel shoppingListModel, BindingResult result, Model model) {
         if (result.hasErrors()) {
             List<ProductModel> productModelList = productService.getProductList();
             List<ShoppingListModel> shoppingItemList = shoppingListService.getItemList();
-
             model.addAttribute("itemList", shoppingItemList);
             model.addAttribute("products", productModelList);
             model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "shoppingList/addProductToShoppingListView";
         }
-
         shoppingListService.addProduct(shoppingListModel);
         return "redirect:/shoppingList";
     }
-
-
 
     @PostMapping("/deleteProductSL/{shoppingItemId}")
     public RedirectView deleteItemAction(@PathVariable Long shoppingItemId){
@@ -95,6 +84,5 @@ public class ShoppingListController {
             }
             return new RedirectView("/shoppingList");
         }
-
     }
 

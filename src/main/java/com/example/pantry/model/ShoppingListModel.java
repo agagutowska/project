@@ -31,5 +31,4 @@ public class ShoppingListModel {
     @Column(name = "measurement_unit")
     @Enumerated(EnumType.STRING)
     private MeasurementUnitEnum measurementUnit;
-
 }

@@ -16,51 +16,46 @@
 <div class="container">
     <h1 class="mt-5 mb-4">PANTRY</h1>
     <h2 class="mt-1 mb-1">Shelves</h2>
-    <p>Shelves is a dedicated place where you can create virtual shelves and fill them with products. Proper shelf inventory is critical to trouble-free use.</p>
+    <p>Shelves is a dedicated place where you can create virtual shelves and fill them with products. Proper shelf
+        inventory is critical to trouble-free use.</p>
     <p>After setting up your shelf properly, you can easily utilize the Shopping List.</p>
 
     <br>
-    <!-- Formularz do dodawania półki -->
     <form th:action="@{/shelves/add}" method="post" th:object="${newShelf}">
         <label for="shelfName">Shelf name:</label>
         <input type="text" id="shelfName" th:field="*{shelfName}" required>
         <p th:if="${#fields.hasErrors('shelfName')}" th:errors="*{shelfName}" class="text-danger"></p>
         <input type="submit" class="btn btn-outline-secondary" value="Add Shelf">
-        <a th:href="@{/}" class="btn btn-outline-warning" >Back to home</a>
+        <a th:href="@{/}" class="btn btn-outline-warning">Back to home</a>
     </form>
-
     <br>
-
-    <!-- Lista wszystkich półek -->
     <div class="col-md-auto">
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Products</th>
-            <th scope="col">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Iteracja przez listę półek i wyświetlenie ich w tabeli -->
-        <tr th:each="shelf : ${shelves}">
-            <td th:text="${shelf.shelfName}"></td>
-            <!-- Formularz do przechodzenia na shelfView-->
-            <td>
-                <a th:href="@{/shelf/{shelfId}(shelfId=${shelf.shelfId})}">
-                    <button class="btn btn-success">Shelf Inventory</button></a>
-            </td>
-            <td>
-                <!-- Formularz do usuwania półki -->
-                <form th:action="@{/shelves/delete/{shelfId}(shelfId=${shelf.shelfId})}" method="post" onsubmit="return deleteConfirm()">
-                    <button type="submit" class="btn btn-danger">Delete shelf</button>
-                </form>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-</div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Products</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="shelf : ${shelves}">
+                <td th:text="${shelf.shelfName}"></td>
+                <td>
+                    <a th:href="@{/shelf/{shelfId}(shelfId=${shelf.shelfId})}">
+                        <button class="btn btn-success">Shelf Inventory</button>
+                    </a>
+                </td>
+                <td>
+                    <form th:action="@{/shelves/delete/{shelfId}(shelfId=${shelf.shelfId})}" method="post"
+                          onsubmit="return deleteConfirm()">
+                        <button type="submit" class="btn btn-danger">Delete shelf</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
