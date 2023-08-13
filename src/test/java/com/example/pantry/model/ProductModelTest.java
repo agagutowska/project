@@ -9,7 +9,6 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -46,7 +45,7 @@ class ProductModelTest {
     }
     @Test
     @DisplayName("Test checks what if product name is empty")
-    void testEmptyProductName() {
+    void setEmptyProductName() {
         // given
         ProductModel product = new ProductModel();
         product.setProductName("");
@@ -63,9 +62,10 @@ class ProductModelTest {
 
     @Test
     @DisplayName("Test checks what if the value of quantity is negative")
-    void testNegativeQuantity() {
+    void setNegativeQuantity() {
         // given
         ProductModel product = new ProductModel();
+        product.setProductName("Coffee");
         product.setQuantityOfProduct(-1);
 
         // when
@@ -79,8 +79,8 @@ class ProductModelTest {
     }
 
     @Test
-    @DisplayName("Test checks if expiry date is valid")
-    void testPastExpiryDate() {
+    @DisplayName("Test checks what if expiry date is from past")
+    void setPastExpiryDate() {
         // given
         ProductModel product = new ProductModel();
         LocalDate pastDate = LocalDate.now().minusDays(1); // data z przeszłości
@@ -96,49 +96,18 @@ class ProductModelTest {
         );
     }
 
-//    @Test
-//    void testZeroQuantity() {
-//        // given
-//        ProductModel product = new ProductModel();
-//        product.setQuantityOfProduct(0);
-//
-//        // when
-//        Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-//
-//        // then
-//        assertThat(violations).isEmpty();
-//    }
-//
-//    @Test
-//    void testPositiveQuantity() {
-//        // given
-//        ProductModel product = new ProductModel();
-//        product.setQuantityOfProduct(10);
-//
-//        // when
-//        Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-//
-//        // then
-//        assertTrue(violations.isEmpty());
-//    }
-//
-//@Test
-//void testFutureExpiryDate() {
-//    // given
-//    ProductModel product = new ProductModel();
-//    LocalDate futureDate = LocalDate.now().plusDays(1); // data z przyszłości
-//    product.setExpiryDate(futureDate);
-//
-//    // when
-//    Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-//
-//    // then
-//    assertTrue(violations.isEmpty());
-//}
+    @Test
+    @DisplayName("Test check what if quantity equals zero")
+    void testZeroQuantity() {
+        // given
+        ProductModel product = new ProductModel();
+        product.setProductName("Milk");
+        product.setQuantityOfProduct(0);
 
+        // when
+        Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
 
-//
-//    @Test
-//    void setStatusOfProduct() {
-//    }
+        // then
+        assertThat(violations).isEmpty();
+    }
 }
