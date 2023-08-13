@@ -49,7 +49,6 @@ public class ShelfController {
     }
 
 
-    //Rzeczy do sortowania
     @GetMapping("shelf/{shelfId}")
     public String viewShelf(@PathVariable("shelfId") Long shelfId,
                             @RequestParam(name = "sortField", required = false, defaultValue = "productName") String sortField,
@@ -58,10 +57,8 @@ public class ShelfController {
         ShelfModel shelf = shelfService.getShelfById(shelfId);
         Sort.Direction direction = sortOrder.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
         List<ProductModel> products = productService.getProductsByShelfAndSortBy(shelf, Sort.by(direction, sortField));
-
         model.addAttribute("shelf", shelf);
         model.addAttribute("products", products);
-
         return "shelves/shelfView";
     }
 

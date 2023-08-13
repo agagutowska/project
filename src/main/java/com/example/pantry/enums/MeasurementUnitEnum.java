@@ -4,7 +4,7 @@ public enum MeasurementUnitEnum {
     PIECES("pieces"),
     GRAMS("grams"),
     KILOGRAMS ("kilograms"),
-    MILILITERS ("mililiters"),
+    MILLILITERS ("milliliters"),
     LITERS ("liters"),
     BAGS("bags"),
     PACKAGES("packages");

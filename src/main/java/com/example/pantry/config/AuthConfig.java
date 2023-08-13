@@ -20,8 +20,6 @@ public class AuthConfig {
 protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests(auth -> {
                 auth.requestMatchers("/login", "/loginError", "/error").permitAll()
-                        .requestMatchers("/static/**").permitAll()
-                        .requestMatchers("/pantrylogo.jpg").permitAll()
                         .requestMatchers("/**").authenticated();
 
             })

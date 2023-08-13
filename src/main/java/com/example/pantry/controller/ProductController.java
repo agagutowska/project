@@ -43,7 +43,6 @@ public class ProductController {
         return "products/addProductView";
     }
 
-//nowe z walidacją
     @PostMapping("/addProduct")
     public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
         if (result.hasErrors()) {
@@ -52,13 +51,12 @@ public class ProductController {
             model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "products/addProductView";
         }
-
         productService.addProduct(productModel);
         return "redirect:/shelf/" + shelfId;
     }
 
     @PostMapping("/deleteProduct/{productId}")
-    public RedirectView deleteProductAction(@PathVariable Long productId, @RequestParam Long shelfId, Model model){
+    public RedirectView deleteProductAction(@PathVariable Long productId, @RequestParam Long shelfId){
         productService.removeProduct(productId);
         return new RedirectView("/shelf/" + shelfId);
     }
@@ -82,11 +80,9 @@ public class ProductController {
             model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
             return "products/editProductView";
         }
-
         ShelfModel existingShelf = shelfService.getShelfById(shelfId);
         editProduct.setShelf(existingShelf);
         productService.saveEditProduct(editProduct);
-
         return "redirect:/shelf/" + shelfId;
     }
 

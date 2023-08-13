@@ -31,7 +31,6 @@ public class ProductModel {
     @Column(name = "quantity")
     private Integer quantityOfProduct;
 
-//    @NotEmpty(message = "Measurement unit cannot be empty.")
     @Column(name = "measurement_unit")
     @Enumerated(EnumType.STRING)
     private MeasurementUnitEnum measurementUnit;
@@ -40,15 +39,11 @@ public class ProductModel {
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
 
-//    @NotEmpty(message = "Status cannot be empty.")
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ProductStatusEnum statusOfProduct;
 
-
-    //    @ManyToOne //do shelves
     @ManyToOne
-    @JoinColumn(name = "shelf_id") // Nazwa kolumny reprezentującej klucz obcy
+    @JoinColumn(name = "shelf_id")
     private ShelfModel shelf;
-
 }
