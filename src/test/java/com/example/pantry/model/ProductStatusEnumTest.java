@@ -9,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductStatusEnumTest {
 
     @Test
-    @DisplayName("check if display status is consistent with a specific enum")
-    void testGetDisplayStatus() {
+    @DisplayName("Test checks if display status is consistent with a specific enum")
+    void getDisplayStatus() {
         assertEquals("Okay", ProductStatusEnum.OKAY.getDisplayStatus());
         assertEquals("If special offer", ProductStatusEnum.SPECIAL_OFFER.getDisplayStatus());
         assertEquals("Need to buy", ProductStatusEnum.NEED_TO_BUY.getDisplayStatus());
     }
 
     @Test
-    @DisplayName("check enum values")
-    void testEnumValues() {
+    @DisplayName("Test checks enum values")
+    void setEnumValues() {
         ProductStatusEnum[] expectedValues = {
                 ProductStatusEnum.OKAY,
                 ProductStatusEnum.SPECIAL_OFFER,
@@ -28,11 +28,10 @@ class ProductStatusEnumTest {
     }
 
     @Test
-    @DisplayName("compare enums with values from class ProductStatus")
-    void testEnumFromValue() {
+    @DisplayName("Test compares enums with values from class ProductStatus")
+    void setEnumFromValue() {
         assertEquals(ProductStatusEnum.OKAY, ProductStatusEnum.valueOf("OKAY"));
         assertEquals(ProductStatusEnum.SPECIAL_OFFER, ProductStatusEnum.valueOf("SPECIAL_OFFER"));
         assertEquals(ProductStatusEnum.NEED_TO_BUY, ProductStatusEnum.valueOf("NEED_TO_BUY"));
     }
-
 }

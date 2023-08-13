@@ -1,12 +1,10 @@
 package com.example.pantry.service;
 
-import com.example.pantry.model.ProductModel;
 import com.example.pantry.model.ShelfModel;
 import com.example.pantry.repository.ShelfRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShelfService {
