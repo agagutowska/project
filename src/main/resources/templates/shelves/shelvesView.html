@@ -47,9 +47,8 @@
             <td th:text="${shelf.shelfName}"></td>
             <!-- Formularz do przechodzenia na shelfView-->
             <td>
-                <a th:href="@{/view/{shelfId}(shelfId=${shelf.shelfId})}">
+                <a th:href="@{/shelf/{shelfId}(shelfId=${shelf.shelfId})}">
                     <button class="btn btn-success">Shelf Inventory</button></a>
-
             </td>
             <td>
                 <!-- Formularz do usuwania półki -->

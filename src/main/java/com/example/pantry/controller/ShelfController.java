@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import java.util.List;
 
 @Controller
@@ -24,12 +23,12 @@ public class ShelfController {
         this.productService = productService;
     }
 
-    @GetMapping("/shelfMenu")
-    public String showShelfMenu(Model model) {
+    @GetMapping("/shelves")
+    public String showShelves(Model model) {
         List<ShelfModel> shelves = shelfService.getAllShelves();
         model.addAttribute("shelves", shelves);
         model.addAttribute("newShelf", new ShelfModel());
-        return "shelves/shelfMenuView";
+        return "shelves/shelvesView";
     }
 
     @PostMapping("/shelves/add")
@@ -37,21 +36,21 @@ public class ShelfController {
         if (bindingResult.hasErrors()){
             model.addAttribute("shelves", shelfService.getAllShelves());
             model.addAttribute("newShelf", shelfModel);
-            return "shelves/shelfMenuView";
+            return "shelves/shelvesView";
         }
         shelfService.addShelf(shelfModel);
-        return "redirect:/shelfMenu";
+        return "redirect:/shelves";
     }
 
     @PostMapping("/shelves/delete/{shelfId}")
     public String deleteShelf(@PathVariable Long shelfId) {
         shelfService.deleteShelfById(shelfId);
-        return "redirect:/shelfMenu";
+        return "redirect:/shelves";
     }
 
 
     //Rzeczy do sortowania
-    @GetMapping("view/{shelfId}")
+    @GetMapping("shelf/{shelfId}")
     public String viewShelf(@PathVariable("shelfId") Long shelfId,
                             @RequestParam(name = "sortField", required = false, defaultValue = "productName") String sortField,
                             @RequestParam(name = "sortOrder", required = false, defaultValue = "asc") String sortOrder,
@@ -65,8 +64,5 @@ public class ShelfController {
 
         return "shelves/shelfView";
     }
-
-
-
 
 }
