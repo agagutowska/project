@@ -20,26 +20,16 @@
     <div class="col-md-auto">
         <a th:href="@{/addProduct(shelfId=${shelf.shelfId})}" class="btn btn-success" >Add product</a>
 
-        <a th:href="@{/shelfMenu}" class="btn btn-outline-warning" >Back to Shelves</a>
+        <a th:href="@{/shelves}" class="btn btn-outline-warning" >Back to Shelves</a>
         <br><br>
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
-                <!-- Przycisk sortowania dla Product Name -->
                 <th scope="col"><button onclick="sort('productName')">Product Name ↑↓</button></th>
-
-                <!-- Przycisk sortowania dla Quantity -->
                 <th scope="col"><button onclick="sort('quantityOfProduct')">Quantity ↑↓</button></th>
-
-                <!-- Przycisk sortowania dla Measurement Unit -->
                 <th scope="col"><button onclick="sort('measurementUnit')">Measurement Unit ↑↓</button></th>
-
-                <!-- Przycisk sortowania dla Expiry Date -->
                 <th scope="col"><button onclick="sort('expiryDate')">Expiry Date ↑↓</button></th>
-
-                <!-- Przycisk sortowania dla Status -->
                 <th scope="col"><button onclick="sort('statusOfProduct')">Status ↑↓</button></th>
-
             </tr>
             </thead>
             <tbody>
@@ -64,7 +54,6 @@
 </div>
 
 <!-- Skrypt JavaScript do obsługi sortowania -->
-
 <script type="text/javascript">
     function sort(sortField) {
         var currentUrl = new URL(window.location.href);

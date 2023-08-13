@@ -26,32 +26,23 @@ public class ProductController {
         this.productService = productService;
         this.shelfService = shelfService;
     }
-    //stare i działa
     @GetMapping("/shelfView")
     public String getProductList(Model model){
         List<ProductModel> productModelList = productService.getProductList();
         model.addAttribute("productList", productModelList);
         return "shelves/shelfView";
     }
-
-    //nowe
     @GetMapping("/addProduct")
     public String showAddProductView(@RequestParam("shelfId") Long shelfId, Model model) {
         List<ShelfModel> shelves = shelfService.getAllShelves();
         model.addAttribute("shelves", shelves);
         model.addAttribute("productModel", new ProductModel());
-        model.addAttribute("shelfId", shelfId); // TO TU Przekazuje wartość shelfId do widoku
+        model.addAttribute("shelfId", shelfId);
         model.addAttribute("statusOfProduct", ProductStatusEnum.values());
         model.addAttribute("measurementUnit", MeasurementUnitEnum.values());
         return "products/addProductView";
     }
 
-    //stare post maping do addProduct
-//    @PostMapping("/addProduct")
-//    public RedirectView postAddProductAction(ProductModel productModel, @RequestParam Long shelfId) {
-//        productService.addProduct(productModel);
-//        return new RedirectView("/view/" + shelfId);
-//    }
 //nowe z walidacją
     @PostMapping("/addProduct")
     public String postAddProductAction(@ModelAttribute @Valid ProductModel productModel, BindingResult result, @RequestParam Long shelfId, Model model) {
@@ -63,13 +54,13 @@ public class ProductController {
         }
 
         productService.addProduct(productModel);
-        return "redirect:/view/" + shelfId;
+        return "redirect:/shelf/" + shelfId;
     }
 
     @PostMapping("/deleteProduct/{productId}")
     public RedirectView deleteProductAction(@PathVariable Long productId, @RequestParam Long shelfId, Model model){
         productService.removeProduct(productId);
-        return new RedirectView("/view/" + shelfId);
+        return new RedirectView("/shelf/" + shelfId);
     }
 
     @GetMapping("/edit/{productId}")
@@ -96,18 +87,7 @@ public class ProductController {
         editProduct.setShelf(existingShelf);
         productService.saveEditProduct(editProduct);
 
-        return "redirect:/view/" + shelfId;
+        return "redirect:/shelf/" + shelfId;
     }
-
-//stare
-//    @PostMapping("/products/save")
-//    public RedirectView saveProduct(ProductModel editProduct, @RequestParam Long shelfId){
-//        ShelfModel existingShelf = shelfService.getShelfById(shelfId);
-//       editProduct.setShelf(existingShelf);
-//        productService.saveEditProduct(editProduct);
-//
-//       return new RedirectView("/view/" + shelfId);
-//   }
-
 
 }
