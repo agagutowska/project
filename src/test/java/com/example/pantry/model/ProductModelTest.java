@@ -9,7 +9,9 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
+
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,7 +29,7 @@ class ProductModelTest {
 
     @Test
     @DisplayName("Test checks if product details are entered correctly")
-    void setValidProduct(){ //czy robi się taki ogólny test czy każdego elementu pojedynczo?
+    void setValidProduct() {
         //given
         ProductModel product = new ProductModel();
         product.setProductName("Apple");
@@ -35,27 +37,24 @@ class ProductModelTest {
         product.setMeasurementUnit(MeasurementUnitEnum.GRAMS);
         product.setExpiryDate(LocalDate.now().plusDays(7));
         product.setStatusOfProduct(ProductStatusEnum.OKAY);
-
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-
         // then
         assertThat(violations).isEmpty();
 
     }
+
     @Test
     @DisplayName("Test checks what if product name is empty")
     void setEmptyProductName() {
         // given
         ProductModel product = new ProductModel();
         product.setProductName("");
-
         // when
-        Set<ConstraintViolation<ProductModel>> violations = validator.validate(product); //czy istnieją naruszenia walidacji (czyli zbiór naruszeń nie jest pusty) oraz czy wśród tych naruszeń jest przynajmniej jedno z komunikatem "Product name cannot be empty.".
-
+        Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
         // then
-        assertFalse(violations.isEmpty()); //oczekuje że argument będzie równy false
-        assertTrue(violations.stream() //oczekuje, że argument będzie równy true
+        assertFalse(violations.isEmpty());
+        assertTrue(violations.stream()
                 .anyMatch(violation -> "Product name cannot be empty.".equals(violation.getMessage()))
         );
     }
@@ -67,14 +66,12 @@ class ProductModelTest {
         ProductModel product = new ProductModel();
         product.setProductName("Coffee");
         product.setQuantityOfProduct(-1);
-
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-
         // then
-        assertFalse(violations.isEmpty()); //oczekujemy, że zbiór naruszeń violations nie jest pusty. Jeśli jest pusty, to znaczy, że walidator nie wykrył żadnych naruszeń, co jest niewłaściwe w tym przypadku, ponieważ pole quantityOfProduct powinno być większe lub równe zeru.
+        assertFalse(violations.isEmpty());
         assertTrue(violations.stream()
-                .anyMatch(violation -> "Quantity should not be less than 0.".equals(violation.getMessage())) //sprawdza, czy wśród naruszeń istnieje przynajmniej jedno naruszenie, które ma komunikat "Quantity should not be less than 0.". Wykorzystujemy tu strumień (stream()) naruszeń, a następnie używamy metody anyMatch() do sprawdzenia, czy przynajmniej jeden element spełnia warunek podany w lambdzie. W tym przypadku warunek to sprawdzenie, czy komunikat naruszenia jest zgodny z oczekiwanym komunikatem dla ograniczenia @Min.
+                .anyMatch(violation -> "Quantity should not be less than 0.".equals(violation.getMessage()))
         );
     }
 
@@ -83,12 +80,10 @@ class ProductModelTest {
     void setPastExpiryDate() {
         // given
         ProductModel product = new ProductModel();
-        LocalDate pastDate = LocalDate.now().minusDays(1); // data z przeszłości
+        LocalDate pastDate = LocalDate.now().minusDays(1);
         product.setExpiryDate(pastDate);
-
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-
         // then
         assertFalse(violations.isEmpty());
         assertTrue(violations.stream()
@@ -103,10 +98,8 @@ class ProductModelTest {
         ProductModel product = new ProductModel();
         product.setProductName("Milk");
         product.setQuantityOfProduct(0);
-
         // when
         Set<ConstraintViolation<ProductModel>> violations = validator.validate(product);
-
         // then
         assertThat(violations).isEmpty();
     }
