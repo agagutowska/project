@@ -25,16 +25,15 @@
   </style>
 
   <script type="text/javascript">
-    function changeButtonColor(buttonElement) {
-        console.log("change")
-      if (buttonElement.className == "btn-change") {
-          console.log("change1")
-          buttonElement.className = "btn-clicked";
-      } else {
-          console.log("change2")
-          buttonElement.className = "btn-change";
+      function changeButtonColor(buttonElement) {
+          if (buttonElement.classList.contains("btn-change")) {
+              buttonElement.classList.remove("btn-change");
+              buttonElement.classList.add("btn-clicked");
+          } else {
+              buttonElement.classList.add("btn-change");
+              buttonElement.classList.remove("btn-clicked");
+          }
       }
-    }
   </script>
 </head>
 
